@@ -33,13 +33,15 @@ VALUES (CURRENT_DATE, 321, 456, CURRENT_DATE, 5, NOW());
 RESET ROLE;
 
 -- 6
-CREATE ROLE client_first_name_last_name LOGIN PASSWORD 'password_for_client';
-GRANT SELECT ON rental TO client_first_name_last_name;
-GRANT SELECT ON payment TO client_first_name_last_name;
+CREATE ROLE client_Hector_Poindexter LOGIN PASSWORD 'password_for_client';
+GRANT SELECT ON rental TO client_Hector_Poindexter;
+GRANT SELECT ON payment TO client_Hector_Poindexter;
 
-SET ROLE client_first_name_last_name;
+SET ROLE client_Hector_Poindexter;
 
-SELECT * FROM rental WHERE customer_id = customer_id;
-SELECT * FROM payment WHERE customer_id = customer_id;
+-- Query to verify that the user sees only their own data
+SELECT * FROM rental WHERE customer_id = (SELECT customer_id FROM customer WHERE first_name = 'HECTOR' AND last_name = 'POINDEXTER');
+SELECT * FROM payment WHERE customer_id = (SELECT customer_id FROM customer WHERE first_name = 'HECTOR' AND last_name = 'POINDEXTER');
 
 RESET ROLE;
+
