@@ -1,0 +1,1 @@
+# SQL_DCL_Artur_Podpalov_Task
